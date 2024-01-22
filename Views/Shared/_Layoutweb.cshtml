@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3470517752302913",
+            enable_page_level_ads: true
+        });
+    </script>
+    <!-- Site information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="keywords" content="@ViewBag.Keywords">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/font-awesome.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/owl.carousel.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/owl.transitions.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/magnific-popup.css")">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/responsive.css")">
+
+    <!-- Google Fonts -->
+    <link href="@Url.Content("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600")" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="@Url.Content("~/images/template/favicon.png")">
+    <link rel="apple-touch-icon" href="@Url.Content("~/images/template/apple-touch-icon.png")">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Url.Content("~/images/template/icon-72x72.png")">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Url.Content("~/images/template/icon-114x114.png")">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+   
+ 
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="lds-css ng-scope">
+            <div class="lds-ripple">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Top Header -->
+    <header class="topbar text-white" id="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-8">
+                    <p class="topbar-intro">Movie trailers, Cinema theaters and showtimes in Bahrain.</p>
+                </div>
+                <div class="col-lg-6 col-sm-4">
+                    <div class="topbar-right-btns">
+                        <a class="btn" href=" ">Movies</a>
+                        <a class="btn" href=" ">Cinemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Top Header End -->
+    <!-- Main Header -->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+        
+                <a class="navbar-brand" href="@Url.Content("~/")">
+                    <img src="@Url.Content("~/images/template/logo.png")" alt="Site Logo">
+                </a>
+            </div>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- BHShowstop728x90 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-3470517752302913"
+                 data-ad-slot="8604052756"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </nav>
+    <!-- Main Header End -->
+    @RenderBody()
+
+
+    <!-- Footer Start -->
+    <footer class="text-white">
+        <div class="footer-widget-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 sm-bottom-40">
+                        <div class="widget about-widget">
+                            <div class="widget-inner">
+                                <a class="footer-logo" href="@Url.Content("~/index.html")">
+                                    <img src="images/template/logo-footer.png" alt="Footer logo">
+                                </a>
+                                <p class="about-text">BHShows website, iOs App and Android app gives you the Showtimes of currently running Movies on all Cinema theaters across Bahrain. Movie trailers and posters can be viewed also you can write your movie reviews.</p>
+                                <div class="footer-social">
+                                    <h5 class="footer-social-title">Connect with</h5>
+                                    <div class="socials">
+                                        <a href=""><i class="fa fa-facebook"></i></a>
+                                        <a href=""><i class="fa fa-twitter"></i></a>
+                                        <a href=""><i class="fa fa-google-plus"></i></a>
+                                        <a href=""><i class="fa fa-youtube-play"></i></a>
+                                        <a href=""><i class="fa fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget category-widget">
+                             
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget newsletter-widget">
+                            <h3 class="widget-title">Newsletter</h3>
+                            <div class="widget-inner">
+                                <p>Sign up for our mailling list to get latest updates videos and upcomming Movie</p>
+                                <form id="subscriptionForm" class="subscription" action="#" method="post">
+                                    <input type="email" name="email" placeholder="Email Address" required>
+                                    <button type="submit" name="emailsubmit"><i class="fa fa-arrow-circle-right"></i></button>
+                                    <p class="newsletter-success"></p>
+                                    <p class="newsletter-error"></p>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widget app-widget">
+                            <h3 class="widget-title">BHShows Apps</h3>
+                            <div class="widget-inner">
+                                <a class="google-play-download" href=""><img src="@Url.Content("~/images/icons/google-play.png")" alt="Google Play Download"></a>
+                                <a class="apple-store-download" href=""><img src="@Url.Content("~/images/icons/app-store.png")" alt="Apple Store Download"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-7 col-xs-12 xs-text-center">
+                        <ul class="footer-nav">
+                            <li><a href="">About</a></li>
+                            <li><a href="">Careers</a></li>
+                            <li><a href="">Terms of Use</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-xs-12 xs-text-center">
+                        <p class="copyright-text">&copy; @DateTime.Now.Year <a href="@Url.Content("index.html")">BHShows</a>. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Script -->
+    <script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/owl.carousel.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.magnific-popup.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.ajaxchimp.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/custom.js")"></script>
+</body>
+
+</html>

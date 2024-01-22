@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BHShows.Models.ShowTime_T>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/js/jquery-1.8.3.min.js"></script>
+<div class="container-fluid">
+    <div class="page-content" >
+        <div class="row" style="min-height:850px;">
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <a href="@Url.Content("~/Showtime/DeleteAll")" class="btn btn-danger pull-right">Delete All</a><br />
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1">Movie</th>
+                                        <th class="col-md-1">Cinema</th>
+                                        <th class="col-md-3">Showtime</th>
+                                        <th class="col-md-3">Modify</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Movies_T.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cinema_T.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ShowTime)
+                                            </td>
+
+
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ShowtimeID }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.ShowtimeID }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.ShowtimeID })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+ 

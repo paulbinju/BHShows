@@ -1,0 +1,58 @@
+﻿@model BHShows.Models.Cinema_T
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cinema_T</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatLong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatLong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City_T.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City_T.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country_T.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country_T.Country)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CinemaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

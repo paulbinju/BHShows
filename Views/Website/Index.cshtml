@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layoutweb.cshtml";
+    int count = 0;
+    string imagex = "";
+}
+
+<!-- Banne Slider -->
+<div class="banner-slider-area text-white">
+    <div id="banner-slider" class="owl-carousel banner-slider">
+@foreach (var m in ViewBag.Movies)
+{
+    imagex = "";
+    foreach (var i in ViewBag.Media)
+    {
+        if (i.MovieID == m.MovieID)
+        {
+            imagex = i.MediaID + i.MediaName;
+        }
+    }
+    count++;
+
+    <div class="banner-item banner-item-@count">
+        <div class="overlay-70" style="background-repeat:no-repeat;background-size:cover;background-image:url('@Url.Content("~/moviemedia/poster-"+imagex)');">
+            <a class="play-video" href="https://www.youtube.com/watch?v=@m.YoutubeURL"><i class="fa fa-play"></i></a>
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <span class="rating">@m.Rated</span>
+                            <h1 class="banner-title"><a href="@Url.Content("~/Movie/"+m.MovieID+"/"+m.cleanURL)">@m.Name</a></h1>
+                            <p class="banner-date-meta">@m.ReleasedOn.ToLongDateString()</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+    </div>
+</div>
+<!-- Banne Slider End -->
+
+<div class="main-wrap">
+
+    <!-- Movie Section -->
+    <div class="section  movie-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-xs-6">
+                    <div class="section-header">
+                        <h2 class="section-title">Latest Movies</h2>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                    <a class="all-link" href="movie.html">See All Movies</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="owl-carousel video-carousel" id="video-carousel">
+                   @foreach (var m in ViewBag.Movies)
+                   {
+                       imagex = "";
+                       foreach (var i in ViewBag.Media)
+                       {
+                           if (i.MovieID == m.MovieID)
+                           {
+                               imagex = i.MediaID + i.MediaName;
+                           }
+                       }
+                       count++;
+                    <div class="video-item">
+                        <div class="thumb-wrap">
+                            <img src="@Url.Content("~/moviemedia/poster-"+imagex)" alt="Movie Thumb">
+                            <span class="rating">@m.Rated</span>
+                            <div class="thumb-hover">
+                                <a class="play-video" href="https://www.youtube.com/watch?v=@m.YoutubeURL"><i class="fa fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4 class="video-title"><a href="@Url.Content("~/Movie/"+m.MovieID+"/"+m.cleanURL)">@m.Name</a></h4>
+                            <p class="video-release-on">@m.ReleasedOn.ToLongDateString()</p>
+                        </div>
+                    </div>
+
+                    }
+                    
+                    
+                     
+                     
+                  
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="section   top-padding-normal news-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="section-header">
+                        <h2 class="section-title">Cinemas in Bahrain</h2>
+                    </div>
+                </div>
+           
+            
+ 
+               <div class="col-md-6">
+                   <div class="col-md-6 sm-top-30">
+                       @foreach (var c in ViewBag.Cinemas)
+                       {
+                           <p><b>@c.Name</b> - @c.Location</p>
+                       }
+                   </div>
+               </div>
+
+                <div class="col-md-6" style="background-color:#eeeeee">
+
+           
+                    <!-- BHShowsbody300x600 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:600px"
+                         data-ad-client="ca-pub-3470517752302913"
+                         data-ad-slot="4538962463"></ins>
+                    <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- News End -->
+
+</div>
+

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CinemazModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cinema_T">
+    <Key>
+      <PropertyRef Name="CinemaID" />
+    </Key>
+    <Property Name="CinemaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="LatLong" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="City_T">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country_T">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language_T">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Media_T">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MovieID" Type="int" Nullable="false" />
+    <Property Name="MediaName" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movies_T">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Rated" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar(max)" />
+    <Property Name="ReleasedOn" Type="smalldatetime" />
+    <Property Name="Stars" Type="nvarchar(max)" />
+    <Property Name="Directors" Type="nvarchar(max)" />
+    <Property Name="Writers" Type="nvarchar(max)" />
+    <Property Name="Details" Type="ntext" />
+    <Property Name="YoutubeURL" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ShowTime_T">
+    <Key>
+      <PropertyRef Name="ShowtimeID" />
+    </Key>
+    <Property Name="ShowtimeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShowTime" Type="varchar(max)" />
+    <Property Name="CinemaID" Type="int" />
+    <Property Name="MovieID" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Cinema_T_City_T">
+    <End Role="City_T" Type="Self.City_T" Multiplicity="1" />
+    <End Role="Cinema_T" Type="Self.Cinema_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_T">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Cinema_T">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cinema_T_Country_T">
+    <End Role="Country_T" Type="Self.Country_T" Multiplicity="1" />
+    <End Role="Cinema_T" Type="Self.Cinema_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_T">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Cinema_T">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_T_Country_T">
+    <End Role="Country_T" Type="Self.Country_T" Multiplicity="0..1" />
+    <End Role="City_T" Type="Self.City_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_T">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City_T">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Media_T_Movies_T">
+    <End Role="Movies_T" Type="Self.Movies_T" Multiplicity="1" />
+    <End Role="Media_T" Type="Self.Media_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies_T">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="Media_T">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_T_Language_T">
+    <End Role="Language_T" Type="Self.Language_T" Multiplicity="1" />
+    <End Role="Movies_T" Type="Self.Movies_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language_T">
+        <PropertyRef Name="LanguageID" />
+      </Principal>
+      <Dependent Role="Movies_T">
+        <PropertyRef Name="LanguageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShowTime_T_Cinema_T">
+    <End Role="Cinema_T" Type="Self.Cinema_T" Multiplicity="0..1" />
+    <End Role="ShowTime_T" Type="Self.ShowTime_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema_T">
+        <PropertyRef Name="CinemaID" />
+      </Principal>
+      <Dependent Role="ShowTime_T">
+        <PropertyRef Name="CinemaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShowTime_T_Movies_T">
+    <End Role="Movies_T" Type="Self.Movies_T" Multiplicity="0..1" />
+    <End Role="ShowTime_T" Type="Self.ShowTime_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies_T">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="ShowTime_T">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CinemazModelStoreContainer">
+    <EntitySet Name="Cinema_T" EntityType="Self.Cinema_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City_T" EntityType="Self.City_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country_T" EntityType="Self.Country_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language_T" EntityType="Self.Language_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Media_T" EntityType="Self.Media_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movies_T" EntityType="Self.Movies_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShowTime_T" EntityType="Self.ShowTime_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cinema_T_City_T" Association="Self.FK_Cinema_T_City_T">
+      <End Role="City_T" EntitySet="City_T" />
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cinema_T_Country_T" Association="Self.FK_Cinema_T_Country_T">
+      <End Role="Country_T" EntitySet="Country_T" />
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_T_Country_T" Association="Self.FK_City_T_Country_T">
+      <End Role="Country_T" EntitySet="Country_T" />
+      <End Role="City_T" EntitySet="City_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Media_T_Movies_T" Association="Self.FK_Media_T_Movies_T">
+      <End Role="Movies_T" EntitySet="Movies_T" />
+      <End Role="Media_T" EntitySet="Media_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_T_Language_T" Association="Self.FK_Movies_T_Language_T">
+      <End Role="Language_T" EntitySet="Language_T" />
+      <End Role="Movies_T" EntitySet="Movies_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShowTime_T_Cinema_T" Association="Self.FK_ShowTime_T_Cinema_T">
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+      <End Role="ShowTime_T" EntitySet="ShowTime_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShowTime_T_Movies_T" Association="Self.FK_ShowTime_T_Movies_T">
+      <End Role="Movies_T" EntitySet="Movies_T" />
+      <End Role="ShowTime_T" EntitySet="ShowTime_T" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

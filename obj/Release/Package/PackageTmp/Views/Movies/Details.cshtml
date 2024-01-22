@@ -1,0 +1,214 @@
+﻿@model BHShows.Models.Movies_T
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>   @Html.DisplayFor(model => model.Name)
+ </h2>
+
+<div class="col-md-6">
+   
+    <hr />
+    <dl class="dl-horizontal">
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleasedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleasedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stars)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stars)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Directors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Directors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Writers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Writers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YoutubeURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YoutubeURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Language_T.Language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Language_T.Language)
+        </dd>
+
+    </dl>
+
+
+    
+
+</div>
+<div class="col-md-6">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/@Html.DisplayFor(model => model.YoutubeURL)" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            @using (Html.BeginForm("AddPic", "Movies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            { <p class="col-md-8"><b>Select Image:</b> <input type="file" name="pic" class="form-control" /> </p>
+            <br />
+            <input type="submit" class="btn btn-danger" />
+            <input type="hidden" value="@ViewBag.movieid" name="MovieID" />
+            }
+        </div>
+
+
+        <div class="col-md-6">
+            @foreach (var img in ViewBag.mediat)
+            {
+                <img style="width:150px" src="@Url.Content("~/moviemedia/poster-" + img.MediaID + img.MediaName)" />
+            }
+        </div>
+    </div>
+
+
+
+
+
+
+<br style="clear:both" />
+<br style="clear:both" />
+@using (Html.BeginForm("addShowtimes", "Movies"))
+{
+
+    <div class="col-md-12" style="background-color:#eeeeee">
+        <br style="clear:both" /> 
+
+        <h4>Showtimes</h4>
+        <br style="clear:both" /> 
+        @foreach (var st in ViewBag.showtimes)
+        {
+            <div class="col-md-2">@st.Name</div>
+                <div class="col-md-10">@st.ShowTime</div>
+                <br style="clear:both" /><br />
+
+        }
+
+
+        <br style="clear:both" /><br />
+        @{
+            int x = 0;
+            int flag = 0;
+        }
+        @{ 
+            if (ViewBag.cinemas != null)
+            {
+                foreach (var c in ViewBag.cinemas)
+                {
+                    x++;
+            <div class="col-md-12" style="clear:both;height:19px ">
+                <div class="col-md-2">@c.Name  &nbsp;&nbsp;</div>
+                <div class="col-md-10">
+                    @if (flag == 0)
+                    {
+                        foreach (var cm in ViewBag.cinemovie)
+                        {
+                            if (cm.CinemaID == c.CinemaID)
+                            {
+                    <input type="text" class="form-control" name="showtime-@x" value="@cm.ShowTime"  />
+                    <input type="hidden" value="@x" name="xxx" />
+                    <input type="hidden" value="@c.CinemaID" name="cinema-@x" />
+                                flag = 1;
+                            }
+
+                        }
+                        if (flag == 0)
+                        {
+                    <input type="text" class="form-control" name="showtime-@x"  />
+                    <input type="hidden" value="@x" name="xxx" />
+                    <input type="hidden" value="@c.CinemaID" name="cinema-@x" />
+                            flag = 1;
+                        }
+                        flag = 0;
+
+                    }
+                </div>
+
+            </div>
+
+            <br style="clear:both" />
+
+                }
+            }
+            }
+        <input type="hidden" value="@ViewBag.movieid" name="MovieID" />
+        <div class="col-md-2"></div>
+        <div class="col-md-10" style="padding:15px 25px"><input type="submit" value="Set Showtimes" class="btn btn-warning" /></div>
+
+        <br style="clear:both" /><br />
+        <br style="clear:both" /><br />
+            
+           
+        </div>
+
+            }
+    <br style="clear:both" /><br />
+
+
+
+    <br style="clear:both" /><br />
+    <br style="clear:both" /><br />
+
+
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MovieID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <br style="clear:both" /><br />
+    <br style="clear:both" /><br />

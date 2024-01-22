@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CinemazModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cinema_T">
+    <Key>
+      <PropertyRef Name="CinemaID" />
+    </Key>
+    <Property Name="CinemaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LatLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City_T" Relationship="Self.FK_Cinema_T_City_T" FromRole="Cinema_T" ToRole="City_T" />
+    <NavigationProperty Name="Country_T" Relationship="Self.FK_Cinema_T_Country_T" FromRole="Cinema_T" ToRole="Country_T" />
+    <NavigationProperty Name="ShowTime_T" Relationship="CinemazModel.FK_ShowTime_T_Cinema_T" FromRole="Cinema_T" ToRole="ShowTime_T" />
+  </EntityType>
+  <EntityType Name="City_T">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryID" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cinema_T" Relationship="Self.FK_Cinema_T_City_T" FromRole="City_T" ToRole="Cinema_T" />
+    <NavigationProperty Name="Country_T" Relationship="Self.FK_City_T_Country_T" FromRole="City_T" ToRole="Country_T" />
+  </EntityType>
+  <EntityType Name="Country_T">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cinema_T" Relationship="Self.FK_Cinema_T_Country_T" FromRole="Country_T" ToRole="Cinema_T" />
+    <NavigationProperty Name="City_T" Relationship="Self.FK_City_T_Country_T" FromRole="Country_T" ToRole="City_T" />
+  </EntityType>
+  <EntityType Name="Movies_T">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReleasedOn" Type="DateTime" Precision="0" />
+    <Property Name="Stars" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Directors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Writers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Language_T" Relationship="CinemazModel.FK_Movies_T_Language_T" FromRole="Movies_T" ToRole="Language_T" />
+    <Property Name="YoutubeURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Media_T" Relationship="CinemazModel.FK_Media_T_Movies_T" FromRole="Movies_T" ToRole="Media_T" />
+    <NavigationProperty Name="ShowTime_T" Relationship="CinemazModel.FK_ShowTime_T_Movies_T" FromRole="Movies_T" ToRole="ShowTime_T" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Cinema_T_City_T">
+    <End Role="City_T" Type="Self.City_T" Multiplicity="1" />
+    <End Role="Cinema_T" Type="Self.Cinema_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_T">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Cinema_T">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cinema_T_Country_T">
+    <End Role="Country_T" Type="Self.Country_T" Multiplicity="1" />
+    <End Role="Cinema_T" Type="Self.Cinema_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_T">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Cinema_T">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_T_Country_T">
+    <End Role="Country_T" Type="Self.Country_T" Multiplicity="0..1" />
+    <End Role="City_T" Type="Self.City_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_T">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City_T">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CinemazEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cinema_T" EntityType="Self.Cinema_T" />
+    <EntitySet Name="City_T" EntityType="Self.City_T" />
+    <EntitySet Name="Country_T" EntityType="Self.Country_T" />
+    <EntitySet Name="Movies_T" EntityType="Self.Movies_T" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Cinema_T_City_T" Association="Self.FK_Cinema_T_City_T">
+      <End Role="City_T" EntitySet="City_T" />
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cinema_T_Country_T" Association="Self.FK_Cinema_T_Country_T">
+      <End Role="Country_T" EntitySet="Country_T" />
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_T_Country_T" Association="Self.FK_City_T_Country_T">
+      <End Role="Country_T" EntitySet="Country_T" />
+      <End Role="City_T" EntitySet="City_T" />
+    </AssociationSet>
+    <EntitySet Name="Language_T" EntityType="CinemazModel.Language_T" />
+    <AssociationSet Name="FK_Movies_T_Language_T" Association="CinemazModel.FK_Movies_T_Language_T">
+      <End Role="Language_T" EntitySet="Language_T" />
+      <End Role="Movies_T" EntitySet="Movies_T" />
+    </AssociationSet>
+    <EntitySet Name="Media_T" EntityType="CinemazModel.Media_T" />
+    <AssociationSet Name="FK_Media_T_Movies_T" Association="CinemazModel.FK_Media_T_Movies_T">
+      <End Role="Movies_T" EntitySet="Movies_T" />
+      <End Role="Media_T" EntitySet="Media_T" />
+    </AssociationSet>
+    <EntitySet Name="ShowTime_T" EntityType="CinemazModel.ShowTime_T" />
+    <AssociationSet Name="FK_ShowTime_T_Cinema_T" Association="CinemazModel.FK_ShowTime_T_Cinema_T">
+      <End Role="Cinema_T" EntitySet="Cinema_T" />
+      <End Role="ShowTime_T" EntitySet="ShowTime_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShowTime_T_Movies_T" Association="CinemazModel.FK_ShowTime_T_Movies_T">
+      <End Role="Movies_T" EntitySet="Movies_T" />
+      <End Role="ShowTime_T" EntitySet="ShowTime_T" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Language_T">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies_T" Relationship="CinemazModel.FK_Movies_T_Language_T" FromRole="Language_T" ToRole="Movies_T" />
+  </EntityType>
+  <Association Name="FK_Movies_T_Language_T">
+    <End Type="CinemazModel.Language_T" Role="Language_T" Multiplicity="1" />
+    <End Type="CinemazModel.Movies_T" Role="Movies_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language_T">
+        <PropertyRef Name="LanguageID" />
+      </Principal>
+      <Dependent Role="Movies_T">
+        <PropertyRef Name="LanguageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Media_T">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovieID" Type="Int32" Nullable="false" />
+    <Property Name="MediaName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies_T" Relationship="CinemazModel.FK_Media_T_Movies_T" FromRole="Media_T" ToRole="Movies_T" />
+  </EntityType>
+  <Association Name="FK_Media_T_Movies_T">
+    <End Type="CinemazModel.Movies_T" Role="Movies_T" Multiplicity="1" />
+    <End Type="CinemazModel.Media_T" Role="Media_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies_T">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="Media_T">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ShowTime_T">
+    <Key>
+      <PropertyRef Name="ShowtimeID" />
+    </Key>
+    <Property Name="ShowtimeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShowTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CinemaID" Type="Int32" />
+    <Property Name="MovieID" Type="Int32" />
+    <NavigationProperty Name="Cinema_T" Relationship="CinemazModel.FK_ShowTime_T_Cinema_T" FromRole="ShowTime_T" ToRole="Cinema_T" />
+    <NavigationProperty Name="Movies_T" Relationship="CinemazModel.FK_ShowTime_T_Movies_T" FromRole="ShowTime_T" ToRole="Movies_T" />
+  </EntityType>
+  <Association Name="FK_ShowTime_T_Cinema_T">
+    <End Type="CinemazModel.Cinema_T" Role="Cinema_T" Multiplicity="0..1" />
+    <End Type="CinemazModel.ShowTime_T" Role="ShowTime_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema_T">
+        <PropertyRef Name="CinemaID" />
+      </Principal>
+      <Dependent Role="ShowTime_T">
+        <PropertyRef Name="CinemaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShowTime_T_Movies_T">
+    <End Type="CinemazModel.Movies_T" Role="Movies_T" Multiplicity="0..1" />
+    <End Type="CinemazModel.ShowTime_T" Role="ShowTime_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies_T">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="ShowTime_T">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

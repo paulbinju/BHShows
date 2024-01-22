@@ -1,0 +1,42 @@
+﻿@model BHShows.Models.ShowTime_T
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShowTime_T</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cinema_T.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cinema_T.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Movies_T.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Movies_T.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShowtimeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

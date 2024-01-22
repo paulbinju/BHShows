@@ -1,0 +1,182 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layoutweb.cshtml";
+    string imagex1 = "", imagex2 = "";
+    var moviename = "";
+    var videourl = "";
+    int z = 0;
+    int count = 0;
+    string imagex = "";
+}
+
+@foreach (var mx in ViewBag.Movie)
+{
+    moviename = mx.Name;
+    videourl = "https://www.youtube.com/watch?v=" + mx.YoutubeURL;
+    ViewBag.Title = mx.Name + " " + mx.Language + " Movie Showtimes in Bahrain Cinemas, Seef, Dana, Hamra, Novo";
+    ViewBag.Description = "Showtimes of " + mx.Name + " in various Cinemas across Bahrain. See the trailers of " + mx.Name + " write your comments, buy tickets";
+    ViewBag.Keywords = mx.Name + ",Movies,Showtime,Bahrain, Cinemas, Seef, Dana, Hamra, Novo";
+}
+
+@foreach (var m in ViewBag.media)
+{
+    if (z == 0)
+    {
+        imagex1 = m.MediaID + m.MediaName;
+        z++;
+    }
+    if (z == 1)
+    {
+        imagex2 = m.MediaID + m.MediaName;
+
+    }
+
+}
+<!-- Page Header -->
+<div class="page-header single-video-header">
+    <div class="page-header-overlay" style="background-repeat:no-repeat;background-size:cover;background-image:url('@Url.Content("~/moviemedia/poster-"+imagex1)');">
+        <div class="container">
+            <h2 class="page-title">@moviename</h2>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<div class="main-wrap">
+    <div class="section section-padding video-single-section">
+        <div class="container">
+            <div class="video-single" style="overflow:hidden">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="thumb-wrap single-thumb">
+                            <img src="@Url.Content("~/moviemedia/poster-"+imagex1)" alt="Dark Night - 2">
+                            <div class="thumb-hover">
+                                <a class="play-video" href="@videourl"><i class="fa fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="content-wrap">
+
+                            <div class="video-details xs-top-40">
+                                @foreach (var m in ViewBag.Movie)
+                                {
+
+
+                                    <div class="single-section">
+                                        <h3 class="video-title">@m.Name</h3>
+                                        <p class="video-release-date">@m.ReleasedOn.ToLongDateString()</p>
+                                        <br />
+                                        <div class="video-attributes">
+                                            <p class="cast"><label>Actors:</label> @m.Stars</p>
+                                            <p class="duration"><label>Rated:</label> @m.Rated</p>
+                                            <p class="genre"><label>Genres:</label> @m.Type</p>
+                                            <p class="country"><label>Directors: </label> @m.Directors</p>
+                                            <p class="language"><label>Language: </label> @m.Language</p>
+                                        </div>
+                                        <div class="share-on">
+                                            <label>Share: </label>
+                                            <div class="share-social">
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-section video-entry">
+                                        <h3 class="single-section-title">@m.Name Story</h3>
+                                        <div class="section-content">
+                                            @m.Details
+                                        </div>
+                                    </div>
+
+                                }
+
+                                <div class="single-section video-entry">
+                                    <h3 class="single-section-title">Showtimes</h3>
+                                    <div class="section-content col-md-5">
+                                         
+                                        @foreach (var st in ViewBag.showtimes)
+                                        {
+                                            <div class="col-md-2">@st.Name</div>
+                                            <div class="col-md-10">@st.ShowTime</div>
+                                            <br />
+
+                                        }
+
+
+                                       
+                                    </div>
+                                    </div>
+                                    <div class="single-section video-entry">
+                                        <h3 class="single-section-title">Posters &amp; Photos</h3>
+                                        <div class="section-content">
+                                            <div id="single-gallery-1" class="owl-carousel single-gallery-slider">
+                                                @foreach (var md in ViewBag.media)
+                                                {
+                                                    <img class="img-responsive" src="@Url.Content("~/moviemedia/poster-" + md.MediaID + md.MediaName)" alt="Single Slider Image">
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Movies -->
+    <div class="section section-padding top-padding-normal movie-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="section-header">
+                        <h2 class="section-title">Latest Movies</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="owl-carousel video-carousel" id="video-carousel">
+                @foreach (var mov in ViewBag.Movies)
+                {
+                    imagex = "";
+                    foreach (var i in ViewBag.Media2)
+                    {
+                        if (i.MovieID == mov.MovieID)
+                        {
+                            imagex = i.MediaID + i.MediaName;
+                        }
+                    }
+                    count++;
+                    <div class="video-item">
+                        <div class="thumb-wrap">
+                            <img src="@Url.Content("~/moviemedia/poster-"+imagex)" alt="Movie Thumb">
+                            <span class="rating">@mov.Rated</span>
+                            <div class="thumb-hover">
+                                <a class="play-video" href="https://www.youtube.com/watch?v=@mov.YoutubeURL"><i class="fa fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="video-details">
+                            <h4 class="video-title"><a href="@Url.Content("~/Movie/"+mov.MovieID+"/"+mov.cleanURL)">@mov.Name</a></h4>
+                            <p class="video-release-on">@mov.ReleasedOn.ToLongDateString()</p>
+                        </div>
+                    </div>
+
+                }
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Latest Movies End -->
+</div>
